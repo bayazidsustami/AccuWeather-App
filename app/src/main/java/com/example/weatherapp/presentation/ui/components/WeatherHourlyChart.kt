@@ -1,9 +1,9 @@
-package com.example.weatherapp.ui.components
+package com.example.weatherapp.presentation.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.weatherapp.ui.theme.WeatherAppTheme
+import com.example.weatherapp.presentation.ui.theme.WeatherAppTheme
 import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
 import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.line.lineChart
