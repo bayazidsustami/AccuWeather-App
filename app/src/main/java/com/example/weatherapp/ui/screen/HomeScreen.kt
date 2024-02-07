@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.weatherapp.ui.components.HomeHeader
 import com.example.weatherapp.ui.components.HomeMainWeatherInfo
+import com.example.weatherapp.ui.components.WeatherHourlyChart
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
@@ -30,6 +31,7 @@ fun HomeScreenContent(
     ) {
         HomeHeader(location = "Antang")
         HomeMainWeatherInfo()
+        WeatherHourlyChart()
     }
 }
 @Preview(
