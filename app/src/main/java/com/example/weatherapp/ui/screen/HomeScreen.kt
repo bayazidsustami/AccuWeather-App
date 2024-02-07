@@ -7,13 +7,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.weatherapp.ui.components.HomeHeader
+import com.example.weatherapp.ui.components.HomeMainWeatherInfo
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
-
+    HomeScreenContent(
+        modifier = modifier
+    )
 }
 
 @Composable
@@ -26,6 +29,7 @@ fun HomeScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HomeHeader(location = "Antang")
+        HomeMainWeatherInfo()
     }
 }
 @Preview(
