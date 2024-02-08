@@ -60,6 +60,10 @@ class WeatherMapper @Inject constructor() {
             cloudCeiling = ValueUnit(
                 value = data.ceiling?.metric?.value?.toLong() ?: 0,
                 unit = data.ceiling?.metric?.unit ?: "m"
+            ),
+            cloudCover = ValueUnit(
+                value = data.cloudCover ?: 0,
+                unit = "%"
             )
         )
     }

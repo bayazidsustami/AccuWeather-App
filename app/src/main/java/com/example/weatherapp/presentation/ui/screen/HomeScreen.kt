@@ -1,7 +1,6 @@
 package com.example.weatherapp.presentation.ui.screen
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,15 +19,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.weatherapp.common.UIState
+import com.example.weatherapp.domain.model.HomeContentModel
 import com.example.weatherapp.presentation.ui.components.HomeHeader
 import com.example.weatherapp.presentation.ui.components.HomeMainWeatherInfo
 import com.example.weatherapp.presentation.ui.components.WeatherHourlyChart
 import com.example.weatherapp.presentation.ui.theme.WeatherAppTheme
+import com.example.weatherapp.presentation.viewmodel.HomeViewModel
 import com.google.android.gms.location.LocationServices
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     var location by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -38,6 +43,7 @@ fun HomeScreen(
             if (isGranted) {
                 getCurrentLocation(context){ lat, lon ->
                     location = "$lat,$lon"
+                    viewModel.getHomeContent(location)
                 }
             }
         }
@@ -47,6 +53,7 @@ fun HomeScreen(
         if (hasLocationPermission(context)) {
             getCurrentLocation(context){ lat, lon ->
                 location = "$lat,$lon"
+                viewModel.getHomeContent(location)
             }
         } else {
             requestPermissionLauncher.launch(arrayOf(
@@ -56,22 +63,36 @@ fun HomeScreen(
         }
     }
 
-    HomeScreenContent(
-        modifier = modifier
-    )
+    viewModel.homeContent.collectAsState().value.let { state ->
+        when(state) {
+            is UIState.Loading -> {}
+            is UIState.Success -> {
+                HomeScreenContent(
+                    modifier = modifier,
+                    data = state.data
+                )
+            }
+            is UIState.Error -> {}
+        }
+    }
 }
 
 @Composable
 fun HomeScreenContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    data: HomeContentModel
 ) {
     Column(
         modifier = modifier
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        HomeHeader(location = "Antang")
-        HomeMainWeatherInfo()
+        HomeHeader(
+            location = data.geoPosition.locationName
+        )
+        HomeMainWeatherInfo(
+            data = data.currentWeather
+        )
         WeatherHourlyChart()
     }
 }
@@ -112,6 +133,6 @@ private fun getCurrentLocation(context: Context, callback: (Double, Double) -> U
 @Composable
 fun GreetingPreview() {
     WeatherAppTheme {
-        HomeScreenContent()
+
     }
 }
