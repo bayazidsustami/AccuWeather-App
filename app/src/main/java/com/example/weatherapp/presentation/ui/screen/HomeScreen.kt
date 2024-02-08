@@ -140,6 +140,18 @@ private fun getCurrentLocation(context: Context, callback: (Double, Double) -> U
     }
 }
 
+@Composable
+fun HomeLoading(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        
+    }
+}
+
 @Preview(
     showBackground = true,
     showSystemUi = true
@@ -147,6 +159,6 @@ private fun getCurrentLocation(context: Context, callback: (Double, Double) -> U
 @Composable
 fun GreetingPreview() {
     WeatherAppTheme {
-
+        HomeLoading()
     }
 }
