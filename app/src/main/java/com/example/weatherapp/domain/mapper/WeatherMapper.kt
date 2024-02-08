@@ -2,8 +2,10 @@ package com.example.weatherapp.domain.mapper
 
 import com.example.weatherapp.data.datasource.response.CurrentConditionsResponse
 import com.example.weatherapp.data.datasource.response.GeoPositionsResponse
+import com.example.weatherapp.data.datasource.response.HourlyWeatherResponse
 import com.example.weatherapp.domain.model.CurrentWeatherModel
 import com.example.weatherapp.domain.model.GeoPositionModel
+import com.example.weatherapp.domain.model.HourlyWeatherModel
 import com.example.weatherapp.domain.model.ValueUnit
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -66,6 +68,20 @@ class WeatherMapper @Inject constructor() {
                 unit = "%"
             )
         )
+    }
+
+    fun mapHourlyResponseToDomain(response: List<HourlyWeatherResponse>, timeZone: String) : List<HourlyWeatherModel> {
+        return response.map {
+            HourlyWeatherModel(
+                temperature = ValueUnit(
+                    value = it.temperature?.value ?: 0.0,
+                    unit = it.temperature?.unit ?: ""
+                ),
+                dateTime = epochTimeToReadableString(it.epochDateTime?.toLong() ?: 0, timeZone),
+                iconPhrase = it.iconPhrase ?: "",
+                weatherIcon = it.weatherIcon ?: 0
+            )
+        }
     }
 
     private fun epochTimeToReadableString(epochTime: Long, timeZone: String): String {
