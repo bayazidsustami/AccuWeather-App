@@ -2,9 +2,11 @@ package com.example.weatherapp.domain.mapper
 
 import com.example.weatherapp.data.datasource.response.CurrentConditionsResponse
 import com.example.weatherapp.data.datasource.response.GeoPositionsResponse
+import com.example.weatherapp.data.datasource.response.HistoryWeatherResponse
 import com.example.weatherapp.data.datasource.response.HourlyWeatherResponse
 import com.example.weatherapp.domain.model.CurrentWeatherModel
 import com.example.weatherapp.domain.model.GeoPositionModel
+import com.example.weatherapp.domain.model.HistoryWeatherModel
 import com.example.weatherapp.domain.model.HourlyWeatherModel
 import com.example.weatherapp.domain.model.ValueUnit
 import java.text.SimpleDateFormat
@@ -79,6 +81,20 @@ class WeatherMapper @Inject constructor() {
                 ),
                 dateTime = epochTimeToReadableString(it.epochDateTime?.toLong() ?: 0, timeZone),
                 iconPhrase = it.iconPhrase ?: "",
+                weatherIcon = it.weatherIcon ?: 0
+            )
+        }
+    }
+
+    fun mapHistoryResponseToDomain(response: List<HistoryWeatherResponse>, timeZone: String) : List<HistoryWeatherModel> {
+        return response.map {
+            HistoryWeatherModel(
+                temperature = ValueUnit(
+                    value = it.temperature?.metric?.value ?: 0.0,
+                    unit = it.temperature?.metric?.unit ?: ""
+                ),
+                dateTime = epochTimeToReadableString(it.epochTime?.toLong() ?: 0, timeZone),
+                iconPhrase = it.weatherText ?: "",
                 weatherIcon = it.weatherIcon ?: 0
             )
         }
