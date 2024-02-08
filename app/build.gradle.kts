@@ -82,6 +82,7 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.runtime.ktx)
     implementation(libs.viewmodel.ktx)
+    implementation(libs.accompanist.permission)
 
     implementation(libs.hilt.nav.compose)
     implementation(libs.hilt)
