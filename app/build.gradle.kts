@@ -2,6 +2,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.android.hilt)
 }
 
 android {
@@ -19,6 +21,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "BASE_URL", "\"http://dataservice.accuweather.com/\"")
+        buildConfigField("String", "API_KEY", "\"LWxMZAOfVlFoWQAIvbXpOxEbAG0V0Xb9\"")
     }
 
     buildTypes {
@@ -39,6 +44,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -48,6 +54,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
@@ -66,6 +76,18 @@ dependencies {
     implementation(libs.vico.compose.m3)
 
     implementation(libs.coil)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.runtime.ktx)
+    implementation(libs.viewmodel.ktx)
+    implementation(libs.google.accompanist.permission)
+    implementation(libs.google.android.location)
+
+    implementation(libs.hilt.nav.compose)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 
     testImplementation(libs.junit)
 
