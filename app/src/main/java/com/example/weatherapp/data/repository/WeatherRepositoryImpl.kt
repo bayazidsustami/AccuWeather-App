@@ -16,14 +16,14 @@ class WeatherRepositoryImpl @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
 ): WeatherRepository {
 
-    override suspend fun getGeoPosition(latLon: String): Flow<GeoPositionsResponse> {
+    override fun getGeoPosition(latLon: String): Flow<GeoPositionsResponse> {
         return flow {
             val result = apiService.getGeoPosition(latLon)
             emit(result)
         }.flowOn(dispatcher)
     }
 
-    override suspend fun getCurrentCondition(locationKey: String): Flow<List<CurrentConditionsResponse>> {
+    override fun getCurrentCondition(locationKey: String): Flow<List<CurrentConditionsResponse>> {
         return flow {
             val result = apiService.getCurrentCondition(locationKey)
             emit(result)
