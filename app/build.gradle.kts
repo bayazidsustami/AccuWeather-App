@@ -23,7 +23,7 @@ android {
         }
 
         buildConfigField("String", "BASE_URL", "\"http://dataservice.accuweather.com/\"")
-        buildConfigField("String", "API_KEY", "\"NJXlp7F8eW2D7KtQmN1fp28XuHIoCGaf\"")
+        buildConfigField("String", "API_KEY", "\"LWxMZAOfVlFoWQAIvbXpOxEbAG0V0Xb9\"")
     }
 
     buildTypes {
