@@ -55,7 +55,7 @@ object DataSourceModule {
                 val url = chain.request()
                     .url
                     .newBuilder()
-                    .addQueryParameter("apiKey", BuildConfig.API_KEY)
+                    .addQueryParameter("apikey", BuildConfig.API_KEY)
                     .build()
                 val request = chain.request().newBuilder().url(url).build()
                 chain.proceed(request)
