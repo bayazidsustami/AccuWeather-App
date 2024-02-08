@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.weatherapp.common.UIState
 import com.example.weatherapp.domain.model.HomeContentModel
+import com.example.weatherapp.presentation.ui.components.ErrorPage
 import com.example.weatherapp.presentation.ui.components.HomeHeader
 import com.example.weatherapp.presentation.ui.components.HomeMainWeatherInfo
 import com.example.weatherapp.presentation.ui.components.WeatherHistory
@@ -68,14 +69,18 @@ fun HomeScreen(
 
     viewModel.homeContent.collectAsState().value.let { state ->
         when(state) {
-            is UIState.Loading -> {}
+            is UIState.Loading -> {
+
+            }
             is UIState.Success -> {
                 HomeScreenContent(
                     modifier = modifier,
                     data = state.data
                 )
             }
-            is UIState.Error -> {}
+            is UIState.Error -> {
+                ErrorPage()
+            }
         }
     }
 }
