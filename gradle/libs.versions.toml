@@ -15,7 +15,8 @@ retrofit = "2.9.0"
 logging-interceptor = "4.10.0"
 hilt-navigation = "1.1.0"
 hilt = "2.48"
-accompanist-permission = "0.25.0"
+google-accompanist-permission = "0.25.0"
+google-android-location = "21.0.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -43,7 +44,8 @@ viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx"
 hilt-nav-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
-accompanist-permission = { group= "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist-permission"}
+google-accompanist-permission = { group= "com.google.accompanist", name = "accompanist-permissions", version.ref = "google-accompanist-permission"}
+google-android-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "google-android-location" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
