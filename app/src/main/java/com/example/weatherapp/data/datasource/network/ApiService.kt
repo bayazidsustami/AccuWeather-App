@@ -12,7 +12,7 @@ interface ApiService {
     suspend fun getCurrentCondition(
         @Path("location_key") locationKey: String,
         @Query("details") details: Boolean = true
-    ) : CurrentConditionsResponse
+    ) : List<CurrentConditionsResponse>
 
     @GET("locations/v1/cities/geoposition/search")
     suspend fun getGeoPosition(
