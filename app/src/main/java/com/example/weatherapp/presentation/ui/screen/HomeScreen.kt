@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
@@ -27,6 +26,7 @@ import com.example.weatherapp.common.UIState
 import com.example.weatherapp.domain.model.HomeContentModel
 import com.example.weatherapp.presentation.ui.components.HomeHeader
 import com.example.weatherapp.presentation.ui.components.HomeMainWeatherInfo
+import com.example.weatherapp.presentation.ui.components.WeatherHistory
 import com.example.weatherapp.presentation.ui.components.WeatherHourlyChart
 import com.example.weatherapp.presentation.ui.theme.WeatherAppTheme
 import com.example.weatherapp.presentation.viewmodel.HomeViewModel
@@ -99,6 +99,9 @@ fun HomeScreenContent(
         )
         WeatherHourlyChart(
             data = data.hourlyWeather
+        )
+        WeatherHistory(
+            data = data.historyWeather
         )
     }
 }
