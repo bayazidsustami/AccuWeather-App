@@ -2,6 +2,7 @@ package com.example.weatherapp.data.datasource.network
 
 import com.example.weatherapp.data.datasource.response.CurrentConditionsResponse
 import com.example.weatherapp.data.datasource.response.GeoPositionsResponse
+import com.example.weatherapp.data.datasource.response.HourlyWeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -18,4 +19,9 @@ interface ApiService {
     suspend fun getGeoPosition(
         @Query("q") latLon: String
     ) : GeoPositionsResponse
+
+    @GET("forecasts/v1/hourly/12hour/{location_key}")
+    suspend fun getHourlyData(
+        @Path("location_key") locationKey: String,
+    ) : List<HourlyWeatherResponse>
 }
