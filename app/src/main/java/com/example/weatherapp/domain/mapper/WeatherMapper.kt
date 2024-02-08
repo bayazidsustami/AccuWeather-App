@@ -79,7 +79,7 @@ class WeatherMapper @Inject constructor() {
                     value = it.temperature?.value ?: 0.0,
                     unit = it.temperature?.unit ?: ""
                 ),
-                dateTime = epochTimeToReadableString(it.epochDateTime?.toLong() ?: 0, timeZone),
+                dateTime = it.epochDateTime?.toLong()?: 0L,
                 iconPhrase = it.iconPhrase ?: "",
                 weatherIcon = it.weatherIcon ?: 0
             )

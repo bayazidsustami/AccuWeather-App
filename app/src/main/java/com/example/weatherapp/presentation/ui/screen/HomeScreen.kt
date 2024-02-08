@@ -93,7 +93,9 @@ fun HomeScreenContent(
         HomeMainWeatherInfo(
             data = data.currentWeather
         )
-        WeatherHourlyChart()
+        WeatherHourlyChart(
+            data = data.hourlyWeather
+        )
     }
 }
 
